@@ -1,0 +1,14 @@
+.main{
+    margin: 2%;
+}
+
+.title{
+    text-align: center;
+    font-size: 1.7em;
+    font-weight: bold;
+}
+
+#payloadImage{
+    width: 45%;
+    margin-left: 27.5%;
+}

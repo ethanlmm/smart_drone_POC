@@ -1,0 +1,70 @@
+<html>
+  <head>
+  	<style>
+      /* Set the size of the div element that contains the map */
+      #map {
+
+        overflow:visible;
+        height: 1000px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+    </head>
+  <body>
+    <h3>Google Maps Demo</h3>
+    <a id="missionId" value=1>22</a>
+    <input id="test">
+    <div id="map"></div>
+    <!--The div element for the map -->
+    <script>
+function req_GET(API, recive) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState === XMLHttpRequest.DONE) {
+            recive(this.response)}}
+    xhttp.open("GET", API);
+    xhttp.send();
+}
+function req_POST(API, send, recive) {
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (xhttp.readyState === XMLHttpRequest.DONE) {
+            recive(this.response)}}
+    xhttp.open("POST",API, true);
+    var data = new FormData();
+     send(data)
+    xhttp.send(data);
+}
+
+function initMap(){
+let id=1//document.getElementById("missionId").value
+
+req_GET("https://s3-5000.wk.api.dontcare.info/get_drone_data?mission_id="+id,
+  (data)=>{
+    let coordinate=JSON.parse(data)
+    
+    var path=[]
+    for (var i = 0; i < coordinate["data"].length; i++) {
+        path.push({lat: coordinate["data"][i].data.lat/10000000.0,lng: coordinate["data"][i].data.lon/10000000.0})
+    }
+    const map = new google.maps.Map(
+      document.getElementById("map"), {zoom: 17, center: path[0], mapTypeId: 'satellite'});
+    const flightPath = new google.maps.Polyline({
+    path: path,
+    geodesic: true,
+    strokeColor: "#FF0000",
+    strokeOpacity: 1.0,
+    strokeWeight: 2,
+  });
+    flightPath.setMap(map);
+  })
+}
+    </script>
+    <script defer
+     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyByPmq4SkAlC03_gJV_nfuNgc846Nz5yiM&callback=initMap">
+    </script>
+
+  </body>
+  </html>
+
+  

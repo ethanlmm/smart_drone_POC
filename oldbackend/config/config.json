@@ -1,0 +1,26 @@
+{
+  "hostConfig":{
+    "hostName":"aws_win_test",
+    "hostType":"aws",
+    "staticIP":true,
+    "ipAddress":"13.57.100.115"
+  },
+  "serviceConfig":{
+    "serviceName":"droneMissionService",
+    "port":"5000"
+  },
+  "224-3306": {
+    "username": "admin",
+    "password": "HP&NXge+3[Qe49Kk",
+    "database": "drone",
+    "host": "149.56.153.224",
+    "dialect": "mysql",
+    "operatorsAliases": false},
+
+
+
+  "server":{
+    "ip":"13.57.100.115",
+    "instance":"aws_root"
+  }
+}
